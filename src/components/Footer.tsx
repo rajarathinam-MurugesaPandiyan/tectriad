@@ -1,9 +1,21 @@
 import React from 'react';
 import { CHANNEL_URL, CHANNEL_HANDLE } from '../data/videosData';
+import {
+  TechTriadLogo,
+  YouTubeIcon,
+  ArrowUpIcon,
+  ExternalLinkIcon,
+} from './Icons';
 
 export const Footer: React.FC = () => {
   const scrollToTop = () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    const prefersReduced = window.matchMedia(
+      '(prefers-reduced-motion: reduce)'
+    ).matches;
+    window.scrollTo({
+      top: 0,
+      behavior: prefersReduced ? 'auto' : 'smooth',
+    });
   };
 
   return (
@@ -12,28 +24,21 @@ export const Footer: React.FC = () => {
         {/* Brand Column */}
         <div className="footer-brand-col">
           <div className="footer-logo">
-            <div className="logo-badge-placeholder">
-              <svg
-                className="logo-icon"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              >
-                <polyline points="16 18 22 12 16 6" />
-                <polyline points="8 6 2 12 8 18" />
-                <line x1="14" y1="4" x2="10" y2="20" stroke="var(--color-primary)" strokeWidth="2.5" />
-              </svg>
-              <span className="logo-dummy-tag">LOGO</span>
+            <div className="logo-badge">
+              <TechTriadLogo size={24} />
             </div>
-            <span className="footer-brand-name">Ethics Of Coding</span>
+            <div className="footer-brand-stack">
+              <span className="footer-brand-name">Tech Triad</span>
+              <span className="footer-brand-sub">
+                Rajarathinam • Gowtham • Gary
+              </span>
+            </div>
           </div>
 
           <p className="footer-about-text">
-            Bridging technology and developers worldwide through native local-language masterclasses in Tamil.
-            Home of <strong>xpense-cloud</strong> and production-grade developer resources.
+            A software and developer education organization founded by
+            Rajarathinam, Gowtham, and Gary—building Ethics Of Coding,
+            xpense-cloud, and Streako.
           </p>
 
           <div className="footer-channel-link-box">
@@ -43,66 +48,96 @@ export const Footer: React.FC = () => {
               rel="noopener noreferrer"
               className="footer-channel-badge"
             >
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="var(--color-youtube)">
-                <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
-              </svg>
+              <YouTubeIcon size={19} className="footer-yt-icon" />
               <span>{CHANNEL_HANDLE} on YouTube</span>
             </a>
           </div>
         </div>
 
-        {/* Quick Nav Links */}
+        {/* Products & Services Column */}
         <div className="footer-links-col">
-          <h4 className="footer-col-title">Navigation</h4>
+          <h2 className="footer-col-title">Products &amp; Services</h2>
           <ul className="footer-links-list">
-            <li><a href="#hero">Home</a></li>
-            <li><a href="https://xpense-cloud.in" target="_blank" rel="noopener noreferrer">xpense-cloud.in (Live App ↗)</a></li>
-            <li><a href="#products">Product Architecture</a></li>
-            <li><a href="#videos">YouTube Video Library</a></li>
-            <li><a href="#mission">Our Mission</a></li>
-            <li><a href="#community">Community</a></li>
+            <li>
+              <a href="#videos">Ethics Of Coding (Service)</a>
+            </li>
+            <li>
+              <a
+                href="https://xpense-cloud.in"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                xpense-cloud.in (Product) <ExternalLinkIcon size={12} />
+              </a>
+            </li>
+            <li>
+              <a
+                href="http://streako.in/"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                streako.in (Product) <ExternalLinkIcon size={12} />
+              </a>
+            </li>
+            <li>
+              <a href="#products">All Products &amp; Services</a>
+            </li>
+            <li>
+              <a href="#mission">Meet the Triad</a>
+            </li>
           </ul>
         </div>
 
-        {/* Tutorials Column */}
+        {/* Masterclasses Column */}
         <div className="footer-links-col">
-          <h4 className="footer-col-title">Popular Masterclasses</h4>
+          <h2 className="footer-col-title">Popular Masterclasses</h2>
           <ul className="footer-links-list">
-            <li><a href="#videos">Flutter Complete Tutorial Season 1</a></li>
-            <li><a href="#videos">Flutter Complete Tutorial Season 2</a></li>
-            <li><a href="#videos">Flutter BLoC Pattern Masterclass</a></li>
-            <li><a href="#videos">Web Dev Course (HTML, CSS, JS)</a></li>
-            <li><a href="#products">xpense-cloud App Walkthrough</a></li>
+            <li>
+              <a href="#videos">Flutter Complete Tutorial Season 1</a>
+            </li>
+            <li>
+              <a href="#videos">Flutter Complete Tutorial Season 2</a>
+            </li>
+            <li>
+              <a href="#videos">Flutter BLoC Pattern Masterclass</a>
+            </li>
+            <li>
+              <a href="#videos">Web Dev Course (HTML, CSS, JS)</a>
+            </li>
+            <li>
+              <a href="#product-xpense-cloud">xpense-cloud Case Study</a>
+            </li>
           </ul>
         </div>
 
-        {/* Connect & Community Column */}
+        {/* Community Column */}
         <div className="footer-links-col">
-          <h4 className="footer-col-title">Join the Community</h4>
+          <h2 className="footer-col-title">Join the Community</h2>
           <p className="footer-community-desc">
-            Subscribe ❤️ and join our coding community today! Learn, build, and grow together.
+            Subscribe and join our engineering community—learn clean architecture,
+            track your habits with Streako, and manage expenses in xpense-cloud.
           </p>
           <div className="footer-social-buttons">
             <a
               href={`${CHANNEL_URL}?sub_confirmation=1`}
               target="_blank"
               rel="noopener noreferrer"
-              className="btn btn-youtube btn-sm"
-              style={{ width: '100%' }}
+              className="btn btn-youtube btn-sm footer-sub-btn"
             >
-              Subscribe on YouTube 🔔
+              <YouTubeIcon size={16} />
+              <span>Subscribe on YouTube</span>
             </a>
           </div>
         </div>
       </div>
 
-      {/* Footer Bottom Bar */}
       <div className="container footer-bottom-bar">
         <div className="bottom-copy">
-          © {new Date().getFullYear()} Ethics Of Coding. All rights reserved.
+          © {new Date().getFullYear()} Tech Triad • Founded by Rajarathinam,
+          Gowtham &amp; Gary.
         </div>
         <div className="bottom-center">
-          Value Education 📚 • No Barriers 🚀
+          Ethics Of Coding • xpense-cloud • Streako
         </div>
         <button
           type="button"
@@ -111,9 +146,7 @@ export const Footer: React.FC = () => {
           aria-label="Scroll back to top"
         >
           <span>Top</span>
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
-            <path d="M18 15l-6-6-6 6"/>
-          </svg>
+          <ArrowUpIcon size={14} />
         </button>
       </div>
     </footer>

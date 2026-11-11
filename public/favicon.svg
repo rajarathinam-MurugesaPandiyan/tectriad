@@ -1,7 +1,12 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
-  <rect width="100" height="100" rx="24" fill="#080D18"/>
-  <rect x="4" y="4" width="92" height="92" rx="20" fill="none" stroke="#3B82F6" stroke-width="4" stroke-opacity="0.4"/>
-  <path d="M35 68 L18 50 L35 32" fill="none" stroke="#3B82F6" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
-  <path d="M65 32 L82 50 L65 68" fill="none" stroke="#3B82F6" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
-  <line x1="58" y1="26" x2="42" y2="74" stroke="#60A5FA" stroke-width="7" stroke-linecap="round"/>
+  <rect width="100" height="100" rx="24" fill="#080B12"/>
+  <rect x="3" y="3" width="94" height="94" rx="21" fill="none" stroke="#1E293B" stroke-width="2"/>
+  <!-- Connecting Triad Triangle: Rajarathinam, Gowtham & Gary -->
+  <path d="M50 24 L26 68 L74 68 Z" fill="none" stroke="#38BDF8" stroke-width="5" stroke-linejoin="round" stroke-opacity="0.45"/>
+  <!-- Central Tech Triad Studio Node -->
+  <circle cx="50" cy="52" r="7" fill="#F8FAFC"/>
+  <!-- Three Co-Founder Triad Nodes -->
+  <circle cx="50" cy="24" r="10" fill="#38BDF8"/>
+  <circle cx="26" cy="68" r="10" fill="#34D399"/>
+  <circle cx="74" cy="68" r="10" fill="#FB923C"/>
 </svg>

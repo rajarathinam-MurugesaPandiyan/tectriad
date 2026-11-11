@@ -7,47 +7,86 @@ import { MissionSection } from "./components/MissionSection";
 import { Footer } from "./components/Footer";
 import { VideoModal } from "./components/VideoModal";
 
+type ThemeScheme = "light" | "dark";
+
+const THEME_STORAGE_KEY = "tech-triad-theme";
+const LEGACY_THEME_STORAGE_KEY = "ethics-theme";
+
+function readStoredOverride(): ThemeScheme | null {
+  if (typeof window === "undefined") return null;
+  try {
+    const saved =
+      localStorage.getItem(THEME_STORAGE_KEY) ||
+      localStorage.getItem(LEGACY_THEME_STORAGE_KEY);
+    return saved === "light" || saved === "dark" ? saved : null;
+  } catch {
+    return null;
+  }
+}
+
 export function App() {
-  // Theme state: respects user's localStorage, defaults to system theme
-  const [theme, setTheme] = useState<"light" | "dark">(() => {
-    if (typeof window !== "undefined") {
-      const savedTheme = localStorage.getItem("ethics-theme");
-      if (savedTheme === "light" || savedTheme === "dark") {
-        return savedTheme;
-      }
-      return window.matchMedia("(prefers-color-scheme: dark)").matches
-        ? "dark"
-        : "light";
-    }
-    return "light";
+  const [themeOverride, setThemeOverride] = useState<ThemeScheme | null>(
+    readStoredOverride
+  );
+  const [systemPrefersDark, setSystemPrefersDark] = useState<boolean>(() => {
+    if (typeof window === "undefined") return false;
+    return window.matchMedia("(prefers-color-scheme: dark)").matches;
   });
 
-  // Video modal state
+  const resolvedTheme: ThemeScheme =
+    themeOverride ?? (systemPrefersDark ? "dark" : "light");
+
   const [activeVideo, setActiveVideo] = useState<{
     id: string;
     title: string;
   } | null>(null);
 
+  // Reflect color scheme override onto <meta name="color-scheme"> and [data-theme]
   useEffect(() => {
-    document.documentElement.setAttribute("data-theme", theme);
-    localStorage.setItem("ethics-theme", theme);
-  }, [theme]);
+    const meta = document.querySelector('meta[name="color-scheme"]');
+    if (meta) {
+      meta.setAttribute("content", themeOverride ?? "light dark");
+    }
+    document.documentElement.setAttribute("data-theme", resolvedTheme);
+  }, [themeOverride, resolvedTheme]);
 
-  // Listen to OS theme changes if user hasn't explicitly set a preference
+  // Keep OS preference synced without overwriting explicit user overrides
   useEffect(() => {
     const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
     const handleChange = (e: MediaQueryListEvent) => {
-      const saved = localStorage.getItem("ethics-theme");
-      if (!saved) {
-        setTheme(e.matches ? "dark" : "light");
-      }
+      setSystemPrefersDark(e.matches);
     };
     mediaQuery.addEventListener("change", handleChange);
     return () => mediaQuery.removeEventListener("change", handleChange);
   }, []);
 
+  // Sync theme override across browser tabs
+  useEffect(() => {
+    const handleStorage = (e: StorageEvent) => {
+      if (e.key === THEME_STORAGE_KEY || e.key === LEGACY_THEME_STORAGE_KEY) {
+        setThemeOverride(readStoredOverride());
+      }
+    };
+    window.addEventListener("storage", handleStorage);
+    return () => window.removeEventListener("storage", handleStorage);
+  }, []);
+
   const handleToggleTheme = () => {
-    setTheme((prev) => (prev === "light" ? "dark" : "light"));
+    const target: ThemeScheme = resolvedTheme === "light" ? "dark" : "light";
+    const systemCurrent: ThemeScheme = systemPrefersDark ? "dark" : "light";
+
+    try {
+      if (target === systemCurrent) {
+        localStorage.removeItem(THEME_STORAGE_KEY);
+        localStorage.removeItem(LEGACY_THEME_STORAGE_KEY);
+        setThemeOverride(null);
+      } else {
+        localStorage.setItem(THEME_STORAGE_KEY, target);
+        setThemeOverride(target);
+      }
+    } catch {
+      setThemeOverride(target === systemCurrent ? null : target);
+    }
   };
 
   const handleOpenVideo = (videoId: string, videoTitle: string) => {
@@ -60,21 +99,21 @@ export function App() {
 
   return (
     <div className="app-root">
-      {/* Navigation Bar */}
-      <Navbar theme={theme} onToggleTheme={handleToggleTheme} />
+      <a href="#main-content" className="skip-link visually-hidden">
+        Skip to main content
+      </a>
 
-      {/* Main Content Area */}
-      <main id="main-content">
+      <Navbar theme={resolvedTheme} onToggleTheme={handleToggleTheme} />
+
+      <main id="main-content" tabIndex={-1}>
         <Hero />
         <ProductsSection />
         <YouTubeSection onOpenVideoModal={handleOpenVideo} />
         <MissionSection />
       </main>
 
-      {/* Footer */}
       <Footer />
 
-      {/* Global Interactive Video Modal */}
       <VideoModal
         videoId={activeVideo?.id ?? null}
         videoTitle={activeVideo?.title ?? ""}

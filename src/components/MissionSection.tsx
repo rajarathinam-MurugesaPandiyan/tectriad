@@ -1,124 +1,71 @@
-import React from "react";
+import React from 'react';
+import { TECH_TRIAD_MEMBERS } from '../data/triadData';
 
 export const MissionSection: React.FC = () => {
-  const pillars = [
-    {
-      icon: (
-        <svg
-          width="24"
-          height="24"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="2"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          aria-hidden="true"
-        >
-          <circle cx="12" cy="12" r="10" />
-          <path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20" />
-          <path d="M2 12h20" />
-        </svg>
-      ),
-      title: "Breaking Language Barriers",
-      subtitle: "Native Regional Clarity in Tamil",
-      description:
-        "Software engineering concepts are often wrapped in dense jargon. We translate complex topics—like BLoC patterns, state management, asynchronous streams, and cloud APIs—into accessible Tamil without losing technical depth.",
-    },
-    {
-      icon: (
-        <svg
-          width="24"
-          height="24"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="2"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          aria-hidden="true"
-        >
-          <path d="m12.83 2.18a2 2 0 0 0-1.66 0L2.6 6.08a1 1 0 0 0 0 1.83l8.58 3.91a2 2 0 0 0 1.66 0l8.58-3.9a1 1 0 0 0 0-1.83Z" />
-          <path d="m22 17.65-9.17 4.16a2 2 0 0 1-1.66 0L2 17.65" />
-          <path d="m22 12.65-9.17 4.16a2 2 0 0 1-1.66 0L2 12.65" />
-        </svg>
-      ),
-      title: "Architectural Excellence",
-      subtitle: "Beyond Toy Examples",
-      description:
-        "Anyone can copy-paste a tutorial. We teach how senior software engineers think: clean architecture separation (Data, Domain, Presentation), error recovery, dependency injection, and scalable state.",
-    },
-    {
-      icon: (
-        <svg
-          width="24"
-          height="24"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="2"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          aria-hidden="true"
-        >
-          <path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z" />
-          <path d="m12 15-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z" />
-          <path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0" />
-          <path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5" />
-        </svg>
-      ),
-      title: "Production-Grade Software",
-      subtitle: "Ecosystem & xpense-cloud",
-      description:
-        "We don’t just teach theory; we build real platforms. Our flagship financial tracking product, xpense-cloud, serves as both a live service and an open architectural masterclass for our developer community.",
-    },
-  ];
-
   return (
     <section className="section-wrapper mission-section" id="mission">
       <div className="container">
         <div className="section-header">
           <div className="section-eyebrow">
             <span className="badge badge-accent">
-              Our Philosophy &amp; Mission
+              The Triad • People Behind Tech Triad
             </span>
           </div>
           <h2>
-            Democratizing Technology with{" "}
-            <span className="gradient-text">Purpose &amp; Integrity</span>
+            Meet the Triad:{' '}
+            <span className="gradient-text">Rajarathinam, Gowtham &amp; Gary</span>
           </h2>
           <p>
-            At Ethics Of Coding, we believe every developer deserves access to
-            elite software engineering knowledge, regardless of geographical or
-            linguistic boundaries.
+            We are the three co-founders behind Tech Triad—uniting to deliver
+            accessible developer education via Ethics Of Coding alongside our
+            consumer software products xpense-cloud and Streako.
           </p>
         </div>
 
-        {/* Pillars Grid */}
-        <div className="pillars-grid">
-          {pillars.map((item, index) => (
-            <div key={index} className="glass-card pillar-card">
-              <div className="pillar-icon-bubble">{item.icon}</div>
-              <div className="pillar-header-group">
-                <span className="pillar-subtitle">{item.subtitle}</span>
-                <h3 className="pillar-title">{item.title}</h3>
+        {/* Founding Triad Cards */}
+        <ul className="pillars-grid" aria-label="Tech Triad founding members">
+          {TECH_TRIAD_MEMBERS.map((member, index) => (
+            <li
+              key={member.id}
+              className={`glass-card pillar-card brand-theme-${member.accentId}`}
+            >
+              <div className="founder-card-top">
+                <div
+                  className={`pillar-icon-bubble founder-monogram brand-icon-${member.accentId}`}
+                  aria-hidden="true"
+                >
+                  <span>{member.initial}</span>
+                </div>
+                <span className="triad-branch-index" aria-hidden="true">
+                  0{index + 1}
+                </span>
               </div>
-              <p className="pillar-desc">{item.description}</p>
-            </div>
+              <div className="pillar-header-group">
+                <span className={`pillar-subtitle brand-text-${member.accentId}`}>
+                  {member.role}
+                </span>
+                <h3 className="pillar-title">{member.name}</h3>
+              </div>
+              <p className="pillar-desc">
+                One third of the Tech Triad collective—collaborating to build, ship,
+                and support Ethics Of Coding, xpense-cloud, and Streako.
+              </p>
+            </li>
           ))}
-        </div>
+        </ul>
 
-        {/* Education Highlight Quote Card */}
         <div className="glass-card mission-quote-card">
-          <div className="quote-mark">“</div>
+          <div className="quote-mark" aria-hidden="true">
+            &ldquo;
+          </div>
           <blockquote className="mission-quote-text">
-            The Great Learning Platform In Tamil, With lots of Learning With No
-            Cost 💰 Because We Value Education. 📚
+            The Great Learning Platform In Tamil, With Lots of Learning With No
+            Cost — Because We Value Education.
           </blockquote>
           <div className="quote-attribution">
-            <span className="quote-author">Ethics Of Coding</span>
+            <span className="quote-author">Ethics Of Coding • A Tech Triad Service</span>
             <span className="quote-role">
-              Channel &amp; Organization Vision
+              Founded by Rajarathinam, Gowtham &amp; Gary
             </span>
           </div>
         </div>

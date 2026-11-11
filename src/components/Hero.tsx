@@ -1,118 +1,184 @@
 import React from 'react';
-import { CHANNEL_URL, CHANNEL_HANDLE } from '../data/videosData';
+import {
+  TECH_TRIAD_ORG,
+  TECH_TRIAD_MEMBERS,
+  TECH_TRIAD_OFFERINGS,
+} from '../data/triadData';
+import {
+  TechTriadLogo,
+  OfferingBrandIcon,
+  PlayIcon,
+  ExternalLinkIcon,
+} from './Icons';
 
 export const Hero: React.FC = () => {
   return (
     <section className="hero-section" id="hero">
       <div className="container hero-content-grid">
-        {/* Hero Text & Call to Actions */}
         <div className="hero-text-block">
           <div className="badge badge-primary hero-badge">
-            <span className="pulsing-dot" />
-            <span>Organization &amp; Channel • {CHANNEL_HANDLE}</span>
+            <span className="pulsing-dot" aria-hidden="true" />
+            <span>{TECH_TRIAD_ORG.eyebrow}</span>
           </div>
 
           <h1 className="hero-title">
-            Empowering Developers With Code, Craft &amp; <span className="hero-highlight">Ethics.</span>
+            {TECH_TRIAD_ORG.headlinePrefix}{' '}
+            <span className="gradient-text">{TECH_TRIAD_ORG.headlineAccent}</span>
           </h1>
 
-          <p className="hero-description">
-            We break language barriers in tech with hands-on, high-production coding masterclasses in Tamil.
-            From mastering <strong>Flutter &amp; Web Development</strong> to building our flagship finance cloud platform, <strong>xpense-cloud</strong>.
-          </p>
+          <p className="hero-description">{TECH_TRIAD_ORG.description}</p>
 
           <div className="hero-actions">
-            <a
-              href="https://xpense-cloud.in"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="btn btn-primary"
-            >
-              <span>Launch xpense-cloud.in</span>
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
-                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
-                <polyline points="15 3 21 3 21 9" />
-                <line x1="10" y1="14" x2="21" y2="3" />
-              </svg>
-            </a>
-            <a href="#products" className="btn btn-secondary">
-              <span>Explore Projects</span>
+            <a href="#products" className="btn btn-primary">
+              <span>Explore Products &amp; Services</span>
             </a>
             <a href="#videos" className="btn btn-secondary">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
-                <polygon points="5 3 19 12 5 21 5 3"/>
-              </svg>
-              <span>Watch Tutorials</span>
+              <PlayIcon size={16} />
+              <span>Watch Coding Masterclasses</span>
             </a>
-            <a
-              href={`${CHANNEL_URL}?sub_confirmation=1`}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="btn btn-youtube hide-on-mobile"
+          </div>
+        </div>
+
+        {/* Visual Tech Triad Organizational Hierarchy Pattern */}
+        <div
+          className="triad-architecture"
+          aria-label="Tech Triad founding team and products & services structure"
+        >
+          {/* Top Node: The Founding Triad (Rajarathinam, Gowtham & Gary) */}
+          <div className="triad-parent-node glass-card">
+            <div className="triad-parent-head">
+              <div className="triad-parent-emblem">
+                <TechTriadLogo size={26} />
+              </div>
+              <div className="triad-parent-copy">
+                <span className="triad-parent-kicker">The Founding Triad</span>
+                <span className="triad-parent-name">{TECH_TRIAD_ORG.name}</span>
+              </div>
+            </div>
+
+            <span className="triad-parent-divider" aria-hidden="true" />
+
+            <ul className="triad-founders-pills" aria-label="Triad co-founders">
+              {TECH_TRIAD_MEMBERS.map((member) => (
+                <li
+                  key={member.id}
+                  className={`triad-founder-pill brand-theme-${member.accentId}`}
+                >
+                  <span
+                    className={`triad-founder-avatar brand-icon-${member.accentId}`}
+                    aria-hidden="true"
+                  >
+                    {member.initial}
+                  </span>
+                  <span className="triad-founder-name">{member.name}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Architectural Connector Lines branching into Products & Services */}
+          <div className="triad-connectors" aria-hidden="true">
+            <svg
+              viewBox="0 0 900 48"
+              preserveAspectRatio="none"
+              className="triad-connector-svg"
             >
-              <span>Subscribe</span>
-            </a>
+              <line
+                x1="450"
+                y1="0"
+                x2="450"
+                y2="24"
+                vectorEffect="non-scaling-stroke"
+                className="triad-line-stem"
+              />
+              <line
+                x1="145"
+                y1="24"
+                x2="755"
+                y2="24"
+                vectorEffect="non-scaling-stroke"
+                className="triad-line-rail"
+              />
+              <line
+                x1="145"
+                y1="24"
+                x2="145"
+                y2="48"
+                vectorEffect="non-scaling-stroke"
+                className="triad-line-drop triad-drop-ethics"
+              />
+              <line
+                x1="450"
+                y1="24"
+                x2="450"
+                y2="48"
+                vectorEffect="non-scaling-stroke"
+                className="triad-line-drop triad-drop-xpense"
+              />
+              <line
+                x1="755"
+                y1="24"
+                x2="755"
+                y2="48"
+                vectorEffect="non-scaling-stroke"
+                className="triad-line-drop triad-drop-streako"
+              />
+            </svg>
+            <span className="triad-connector-label">
+              {TECH_TRIAD_ORG.offeringsLabel}
+            </span>
           </div>
 
-          {/* Quick Metrics Bar */}
-          <div className="hero-stats-row">
-            <div className="stat-item">
-              <span className="stat-icon" aria-hidden="true">
-                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                  <rect width="20" height="15" x="2" y="4.5" rx="2" />
-                  <polygon points="10 8.5 15 12 10 15.5 10 8.5" fill="currentColor" />
-                </svg>
-              </span>
-              <div className="stat-info">
-                <span className="stat-number">16+</span>
-                <span className="stat-label">In-Depth Tutorials</span>
-              </div>
-            </div>
+          {/* Products & Services Built Underneath Tech Triad */}
+          <ul className="triad-branches-grid">
+            {TECH_TRIAD_OFFERINGS.map((offering) => (
+              <li
+                key={offering.id}
+                className={`triad-branch-card glass-card brand-theme-${offering.id}`}
+              >
+                <div className="triad-branch-top">
+                  <div className={`triad-branch-icon brand-icon-${offering.id}`}>
+                    <OfferingBrandIcon brandId={offering.id} size={20} />
+                  </div>
+                  <span className={`triad-kind-badge brand-chip-${offering.id}`}>
+                    {offering.kind}
+                  </span>
+                </div>
 
-            <div className="stat-divider" />
+                <div className="triad-branch-body">
+                  <span className="triad-branch-role">{offering.roleLabel}</span>
+                  <h2 className="triad-branch-name">{offering.name}</h2>
+                  <p className="triad-branch-summary">{offering.summary}</p>
+                </div>
 
-            <div className="stat-item">
-              <span className="stat-icon" aria-hidden="true">
-                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                  <polyline points="16 18 22 12 16 6" />
-                  <polyline points="8 6 2 12 8 18" />
-                </svg>
-              </span>
-              <div className="stat-info">
-                <span className="stat-number">Flutter &amp; Web</span>
-                <span className="stat-label">Production Stacks</span>
-              </div>
-            </div>
-
-            <div className="stat-divider" />
-
-            <div className="stat-item">
-              <span className="stat-icon" aria-hidden="true">
-                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M17.5 19H9a7 7 0 1 1 6.71-9h1.79a4.5 4.5 0 1 1 0 9Z" />
-                </svg>
-              </span>
-              <div className="stat-info">
-                <span className="stat-number">xpense-cloud.in</span>
-                <span className="stat-label">Live Platform</span>
-              </div>
-            </div>
-
-            <div className="stat-divider" />
-
-            <div className="stat-item">
-              <span className="stat-icon" aria-hidden="true">
-                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M22 10v6M2 10l10-5 10 5-10 5z" />
-                  <path d="M6 12v5c3 3 9 3 12 0v-5" />
-                </svg>
-              </span>
-              <div className="stat-info">
-                <span className="stat-number">Free</span>
-                <span className="stat-label">Tamil Education</span>
-              </div>
-            </div>
-          </div>
+                <div className="triad-branch-footer">
+                  <span className={`triad-status-chip brand-chip-${offering.id}`}>
+                    {offering.statusLabel}
+                  </span>
+                  <div className="triad-branch-links">
+                    <a
+                      href={offering.targetSection}
+                      className="triad-branch-anchor"
+                    >
+                      Details
+                    </a>
+                    {offering.externalUrl && (
+                      <a
+                        href={offering.externalUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="triad-branch-ext"
+                        aria-label={`Open ${offering.name} (${offering.domainLabel}) in new tab`}
+                      >
+                        <span>{offering.domainLabel}</span>
+                        <ExternalLinkIcon size={13} />
+                      </a>
+                    )}
+                  </div>
+                </div>
+              </li>
+            ))}
+          </ul>
         </div>
       </div>
     </section>
