@@ -11,6 +11,7 @@ interface NavbarProps {
 export const Navbar: React.FC<NavbarProps> = ({ theme, onToggleTheme }) => {
   const { pathname } = useLocation();
   const isTutorialsPage = pathname === "/tutorials";
+  const isDiscussPage = pathname === "/discuss";
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const headerRef = useRef<HTMLElement | null>(null);
@@ -101,6 +102,13 @@ export const Navbar: React.FC<NavbarProps> = ({ theme, onToggleTheme }) => {
           <Link to="/#mission" className="nav-link">
             The Triad
           </Link>
+          <Link
+            to="/discuss"
+            className={`nav-link ${isDiscussPage ? "active" : ""}`}
+            aria-current={isDiscussPage ? "page" : undefined}
+          >
+            Let&apos;s Discuss
+          </Link>
           <a href="#community" className="nav-link">
             Community
           </a>
@@ -189,6 +197,15 @@ export const Navbar: React.FC<NavbarProps> = ({ theme, onToggleTheme }) => {
               onClick={closeMobileMenu}
             >
               <span>The Triad (Founders)</span>
+            </Link>
+            <Link
+              to="/discuss"
+              className="mobile-nav-link"
+              onClick={closeMobileMenu}
+              aria-current={isDiscussPage ? "page" : undefined}
+            >
+              <span>Have an Idea? Let&apos;s Discuss</span>
+              <span className="badge badge-primary">Connect</span>
             </Link>
             <a
               href="#community"

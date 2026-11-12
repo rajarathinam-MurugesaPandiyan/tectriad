@@ -31,7 +31,7 @@ export const Footer: React.FC = () => {
             <div className="footer-brand-stack">
               <span className="footer-brand-name">Tectriad</span>
               <span className="footer-brand-sub">
-                Rajarathinam M • Gowtham M • Gary A
+                Rajarathinam&nbsp;M • Gowtham&nbsp;M • Gary&nbsp;A
               </span>
             </div>
           </div>
@@ -85,6 +85,9 @@ export const Footer: React.FC = () => {
             </li>
             <li>
               <Link to="/#mission">Meet the Triad</Link>
+            </li>
+            <li>
+              <Link to="/discuss">Have an Idea? Let&apos;s Discuss</Link>
             </li>
           </ul>
         </div>

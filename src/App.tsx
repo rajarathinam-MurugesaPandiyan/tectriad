@@ -5,6 +5,13 @@ import { Footer } from "./components/Footer";
 import { VideoModal } from "./components/VideoModal";
 import { HomePage } from "./pages/HomePage";
 import { TutorialsPage } from "./pages/TutorialsPage";
+import { DiscussPage } from "./pages/DiscussPage";
+
+const ROUTE_TITLES: Record<string, string> = {
+  "/": "Tectriad | Rajarathinam M, Gowtham M & Gary A — Ethics Of Coding, xpense-cloud & Streako",
+  "/tutorials": "Ethics Of Coding Tutorials | Tectriad",
+  "/discuss": "Have Any Idea in Mind? Let's Discuss | Tectriad",
+};
 
 type ThemeScheme = "light" | "dark";
 
@@ -25,6 +32,10 @@ function readStoredOverride(): ThemeScheme | null {
 
 function ScrollHandler() {
   const { pathname, hash, key } = useLocation();
+
+  useEffect(() => {
+    document.title = ROUTE_TITLES[pathname] ?? ROUTE_TITLES["/"];
+  }, [pathname]);
 
   useEffect(() => {
     const prefersReduced = window.matchMedia(
@@ -154,6 +165,7 @@ export function App() {
             path="/tutorials"
             element={<TutorialsPage onOpenVideoModal={handleOpenVideo} />}
           />
+          <Route path="/discuss" element={<DiscussPage />} />
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
       </main>

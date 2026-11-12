@@ -3,6 +3,7 @@ import { Hero } from '../components/Hero';
 import { ProductsSection } from '../components/ProductsSection';
 import { YouTubeSection } from '../components/YouTubeSection';
 import { MissionSection } from '../components/MissionSection';
+import { DiscussCtaBanner } from '../components/DiscussCtaBanner';
 
 interface HomePageProps {
   onOpenVideoModal: (videoId: string, videoTitle: string) => void;
@@ -15,6 +16,7 @@ export const HomePage: React.FC<HomePageProps> = ({ onOpenVideoModal }) => {
       <ProductsSection />
       <YouTubeSection onOpenVideoModal={onOpenVideoModal} previewLimit={6} />
       <MissionSection />
+      <DiscussCtaBanner />
     </>
   );
 };

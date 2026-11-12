@@ -16,8 +16,18 @@ export const Hero: React.FC = () => {
       <div className="container hero-content-grid">
         <div className="hero-text-block">
           <div className="badge badge-primary hero-badge">
-            <span className="pulsing-dot" aria-hidden="true" />
-            <span>{TECTRIAD_ORG.eyebrow}</span>
+            <span className="hero-badge-brand">
+              <span className="pulsing-dot" aria-hidden="true" />
+              <span>{TECTRIAD_ORG.name}</span>
+            </span>
+            <span className="hero-badge-sep" aria-hidden="true">
+              •
+            </span>
+            <span className="hero-badge-founders">
+              <span className="founder-inline-name">Rajarathinam&nbsp;M</span>,{" "}
+              <span className="founder-inline-name">Gowtham&nbsp;M</span> &amp;{" "}
+              <span className="founder-inline-name">Gary&nbsp;A</span>
+            </span>
           </div>
 
           <h1 className="hero-title">

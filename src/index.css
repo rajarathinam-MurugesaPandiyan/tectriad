@@ -986,13 +986,47 @@ svg {
 
 .hero-badge {
   margin-bottom: 18px;
+  max-width: 100%;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.hero-badge-brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.founder-inline-name {
+  white-space: nowrap;
 }
 
 .pulsing-dot {
   width: 8px;
   height: 8px;
+  flex-shrink: 0;
   border-radius: 50%;
   background: var(--color-primary);
+}
+
+@media (max-width: 560px) {
+  .hero-badge {
+    flex-direction: column;
+    gap: 4px;
+    padding: 8px 14px;
+    border-radius: var(--radius-md);
+    text-align: center;
+    line-height: 1.4;
+  }
+
+  .hero-badge-sep {
+    display: none;
+  }
+
+  .hero-badge-founders {
+    font-size: 0.68rem;
+    letter-spacing: 0.02em;
+  }
 }
 
 @media (prefers-reduced-motion: no-preference) {
@@ -2529,6 +2563,11 @@ dialog.video-dialog::backdrop {
   .triad-connector-label,
   .triad-kind-badge,
   .triad-status-chip,
+  .discuss-form-card,
+  .discuss-sidebar-card,
+  .discuss-cta-card,
+  .form-input,
+  .form-textarea,
   dialog.video-dialog {
     border: 1px solid CanvasText;
   }
@@ -2537,8 +2576,374 @@ dialog.video-dialog::backdrop {
     color: CanvasText;
   }
 
-  :where(a:any-link, button, input, [tabindex]):focus-visible {
+  :where(a:any-link, button, input, textarea, [tabindex]):focus-visible {
     outline: 2px solid Highlight;
     outline-offset: 2px;
+  }
+}
+
+/* ==========================================================================
+   9. DISCUSS PAGE & IDEA SUBMISSION FORM
+   ========================================================================== */
+.app-root {
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+}
+
+.app-root > main {
+  flex: 1;
+}
+
+.discuss-page-section {
+  padding-top: 44px;
+}
+
+.discuss-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1.45fr) minmax(0, 1fr);
+  gap: 28px;
+  align-items: start;
+}
+
+.discuss-form-card {
+  padding: clamp(22px, 3vw, 34px);
+}
+
+.discuss-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.discuss-form-header h2 {
+  font-size: 1.35rem;
+  font-weight: 700;
+  margin-bottom: 6px;
+}
+
+.discuss-form-header p {
+  font-size: 0.9rem;
+  color: var(--color-text-secondary);
+}
+
+.discuss-status-banner {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 12px 14px;
+  border-radius: var(--radius-sm);
+  font-size: 0.92rem;
+  line-height: 1.5;
+  border: 1px solid var(--color-error);
+  background: color-mix(in srgb, var(--color-error) 10%, var(--color-surface));
+  color: var(--color-text);
+}
+
+.discuss-status-banner svg {
+  flex-shrink: 0;
+  margin-top: 2px;
+  color: var(--color-error);
+}
+
+.form-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.form-label {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--color-text);
+}
+
+.form-label span[aria-hidden="true"] {
+  color: var(--color-error);
+}
+
+.form-hint {
+  font-size: 0.84rem;
+  line-height: 1.45;
+  color: var(--color-text-secondary);
+  margin: 0;
+}
+
+.form-input,
+.form-textarea {
+  font: inherit;
+  font-size: max(1rem, 1em);
+  line-height: 1.5;
+  color: var(--color-text);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border-strong);
+  border-radius: var(--radius-sm);
+  padding: 11px 14px;
+  width: 100%;
+  min-block-size: 48px;
+}
+
+.form-textarea {
+  resize: vertical;
+  min-block-size: 132px;
+}
+
+.form-input::placeholder,
+.form-textarea::placeholder {
+  color: var(--color-text-secondary);
+  opacity: 0.85;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .form-input,
+  .form-textarea {
+    transition: border-color 0.16s ease, box-shadow 0.16s ease, background-color 0.16s ease;
+  }
+}
+
+.form-input:hover,
+.form-textarea:hover {
+  border-color: var(--color-primary);
+}
+
+.form-input:focus-visible,
+.form-textarea:focus-visible {
+  outline: 2px solid var(--color-focus-ring);
+  outline-offset: 2px;
+  border-color: var(--color-primary);
+}
+
+.form-input:is(:user-invalid, .user-invalid-fallback),
+.form-textarea:is(:user-invalid, .user-invalid-fallback) {
+  border-color: var(--color-error);
+  background: color-mix(in srgb, var(--color-error) 5%, var(--color-surface));
+}
+
+.form-field:has(:is(:user-invalid, .user-invalid-fallback)) .form-label,
+.form-field.has-error-fallback .form-label {
+  color: var(--color-error);
+}
+
+.field-error-msg {
+  font-size: 0.86rem;
+  font-weight: 500;
+  color: var(--color-error);
+  margin: 2px 0 0;
+  line-height: 1.4;
+}
+
+.discuss-form-actions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  padding-top: 4px;
+}
+
+.discuss-submit-btn {
+  min-block-size: 48px;
+  padding: 12px 24px;
+}
+
+.discuss-submit-btn:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+.discuss-success-state {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 14px;
+  padding: 8px 4px;
+}
+
+.discuss-success-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: var(--radius-md);
+  background: color-mix(in srgb, var(--color-success) 14%, transparent);
+  border: 1px solid color-mix(in srgb, var(--color-success) 40%, transparent);
+  color: var(--color-success);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.discuss-success-state h2 {
+  font-size: 1.4rem;
+  font-weight: 700;
+}
+
+.discuss-success-state p {
+  font-size: 0.98rem;
+  line-height: 1.6;
+  color: var(--color-text-secondary);
+}
+
+.discuss-success-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 4px;
+}
+
+.discuss-sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.discuss-sidebar-card {
+  padding: 22px 24px;
+}
+
+.discuss-sidebar-card h3 {
+  font-size: 1.05rem;
+  font-weight: 700;
+  margin-bottom: 14px;
+}
+
+.discuss-topic-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.discuss-topic-list li {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  font-size: 0.9rem;
+  line-height: 1.5;
+  color: var(--color-text-secondary);
+}
+
+.discuss-topic-icon {
+  width: 22px;
+  height: 22px;
+  border-radius: var(--radius-xs);
+  background: var(--color-primary-light);
+  color: var(--color-primary);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+
+.discuss-founders-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.discuss-founder-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.discuss-founder-avatar {
+  width: 44px;
+  height: 44px;
+  border-radius: 10px;
+  object-fit: cover;
+  border: 1px solid var(--color-border);
+  flex-shrink: 0;
+}
+
+.discuss-founder-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.discuss-founder-meta strong {
+  font-size: 0.92rem;
+  color: var(--color-text);
+}
+
+.discuss-founder-meta span {
+  font-size: 0.8rem;
+  color: var(--color-text-secondary);
+}
+
+.discuss-channel-row {
+  margin-top: 18px;
+  padding-top: 16px;
+  border-top: 1px solid var(--color-border);
+}
+
+.discuss-channel-btn {
+  width: 100%;
+  min-block-size: 48px;
+  justify-content: center;
+}
+
+/* Home Page Discuss CTA Banner */
+.discuss-cta-section {
+  padding-top: 0;
+}
+
+.discuss-cta-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  padding: clamp(24px, 3vw, 36px);
+  border-color: var(--color-glow);
+}
+
+.discuss-cta-copy {
+  max-width: 64ch;
+}
+
+.discuss-cta-eyebrow {
+  margin-bottom: 12px;
+}
+
+.discuss-cta-copy h2 {
+  font-size: clamp(1.5rem, 2.5vw, 2.05rem);
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+
+.discuss-cta-copy p {
+  font-size: 0.98rem;
+  line-height: 1.6;
+  color: var(--color-text-secondary);
+}
+
+.discuss-cta-action {
+  flex-shrink: 0;
+}
+
+.discuss-cta-action .btn {
+  min-block-size: 48px;
+}
+
+@media (pointer: coarse) {
+  .form-input,
+  .discuss-submit-btn,
+  .discuss-channel-btn,
+  .discuss-cta-action .btn {
+    min-block-size: 52px;
+  }
+}
+
+@media (max-width: 900px) {
+  .discuss-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .discuss-cta-card {
+    flex-direction: column;
+    align-items: flex-start;
   }
 }

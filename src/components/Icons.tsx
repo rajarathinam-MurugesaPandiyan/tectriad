@@ -305,3 +305,40 @@ export const CheckCircleIcon: React.FC<IconProps> = ({ size = 14, className }) =
   </svg>
 );
 
+export const SendIcon: React.FC<IconProps> = ({ size = 18, className }) => (
+  <svg
+    width={size}
+    height={size}
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    aria-hidden="true"
+    className={className}
+  >
+    <path d="M22 2 11 13" />
+    <path d="M22 2 15 22 11 13 2 9 22 2z" />
+  </svg>
+);
+
+export const AlertCircleIcon: React.FC<IconProps> = ({ size = 18, className }) => (
+  <svg
+    width={size}
+    height={size}
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    aria-hidden="true"
+    className={className}
+  >
+    <circle cx="12" cy="12" r="10" />
+    <line x1="12" y1="8" x2="12" y2="12" />
+    <line x1="12" y1="16" x2="12.01" y2="16" />
+  </svg>
+);
+
