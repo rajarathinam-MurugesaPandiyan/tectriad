@@ -55,6 +55,8 @@ export interface TriadMember {
   id: string;
   name: string;
   initial: string;
+  avatar: string;
+  avatarPosition?: string;
   role: string;
   accentId: TriadBrandId;
 }

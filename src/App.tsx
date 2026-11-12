@@ -1,27 +1,61 @@
 import { useState, useEffect } from "react";
+import { Navigate, Route, Routes, useLocation } from "react-router-dom";
 import { Navbar } from "./components/Navbar";
-import { Hero } from "./components/Hero";
-import { ProductsSection } from "./components/ProductsSection";
-import { YouTubeSection } from "./components/YouTubeSection";
-import { MissionSection } from "./components/MissionSection";
 import { Footer } from "./components/Footer";
 import { VideoModal } from "./components/VideoModal";
+import { HomePage } from "./pages/HomePage";
+import { TutorialsPage } from "./pages/TutorialsPage";
 
 type ThemeScheme = "light" | "dark";
 
-const THEME_STORAGE_KEY = "tech-triad-theme";
-const LEGACY_THEME_STORAGE_KEY = "ethics-theme";
+const THEME_STORAGE_KEY = "tectriad-theme";
+const LEGACY_THEME_STORAGE_KEYS = ["tech-triad-theme", "ethics-theme"] as const;
 
 function readStoredOverride(): ThemeScheme | null {
   if (typeof window === "undefined") return null;
   try {
     const saved =
       localStorage.getItem(THEME_STORAGE_KEY) ||
-      localStorage.getItem(LEGACY_THEME_STORAGE_KEY);
+      LEGACY_THEME_STORAGE_KEYS.map((key) => localStorage.getItem(key)).find(Boolean);
     return saved === "light" || saved === "dark" ? saved : null;
   } catch {
     return null;
   }
+}
+
+function ScrollHandler() {
+  const { pathname, hash, key } = useLocation();
+
+  useEffect(() => {
+    const prefersReduced = window.matchMedia(
+      "(prefers-reduced-motion: reduce)"
+    ).matches;
+    const behavior: ScrollBehavior = prefersReduced ? "auto" : "smooth";
+
+    if (hash) {
+      const targetId = hash.slice(1);
+      const scrollToTarget = () => {
+        const el = document.getElementById(targetId);
+        if (el) {
+          el.scrollIntoView({ behavior, block: "start" });
+          return true;
+        }
+        return false;
+      };
+
+      if (!scrollToTarget()) {
+        const frame = window.requestAnimationFrame(() => {
+          scrollToTarget();
+        });
+        return () => window.cancelAnimationFrame(frame);
+      }
+      return;
+    }
+
+    window.scrollTo({ top: 0, left: 0, behavior: "auto" });
+  }, [pathname, hash, key]);
+
+  return null;
 }
 
 export function App() {
@@ -63,7 +97,10 @@ export function App() {
   // Sync theme override across browser tabs
   useEffect(() => {
     const handleStorage = (e: StorageEvent) => {
-      if (e.key === THEME_STORAGE_KEY || e.key === LEGACY_THEME_STORAGE_KEY) {
+      if (
+        e.key === THEME_STORAGE_KEY ||
+        LEGACY_THEME_STORAGE_KEYS.includes(e.key as (typeof LEGACY_THEME_STORAGE_KEYS)[number])
+      ) {
         setThemeOverride(readStoredOverride());
       }
     };
@@ -78,7 +115,7 @@ export function App() {
     try {
       if (target === systemCurrent) {
         localStorage.removeItem(THEME_STORAGE_KEY);
-        localStorage.removeItem(LEGACY_THEME_STORAGE_KEY);
+        LEGACY_THEME_STORAGE_KEYS.forEach((key) => localStorage.removeItem(key));
         setThemeOverride(null);
       } else {
         localStorage.setItem(THEME_STORAGE_KEY, target);
@@ -99,6 +136,8 @@ export function App() {
 
   return (
     <div className="app-root">
+      <ScrollHandler />
+
       <a href="#main-content" className="skip-link visually-hidden">
         Skip to main content
       </a>
@@ -106,10 +145,17 @@ export function App() {
       <Navbar theme={resolvedTheme} onToggleTheme={handleToggleTheme} />
 
       <main id="main-content" tabIndex={-1}>
-        <Hero />
-        <ProductsSection />
-        <YouTubeSection onOpenVideoModal={handleOpenVideo} />
-        <MissionSection />
+        <Routes>
+          <Route
+            path="/"
+            element={<HomePage onOpenVideoModal={handleOpenVideo} />}
+          />
+          <Route
+            path="/tutorials"
+            element={<TutorialsPage onOpenVideoModal={handleOpenVideo} />}
+          />
+          <Route path="*" element={<Navigate to="/" replace />} />
+        </Routes>
       </main>
 
       <Footer />

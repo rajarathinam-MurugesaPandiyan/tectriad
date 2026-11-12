@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { PRODUCTS_DATA } from '../data/productsData';
 import type { ProductFeature } from '../types';
 import {
@@ -109,10 +110,10 @@ export const ProductsSection: React.FC = () => {
           </div>
           <h2>
             Our Products &amp; Services Under{' '}
-            <span className="gradient-text">Tech Triad</span>
+            <span className="gradient-text">Tectriad</span>
           </h2>
           <p>
-            Built and operated by Rajarathinam, Gowtham, and Gary—combining free
+            Built and operated by Rajarathinam M, Gowtham M, and Gary A—combining free
             developer education services with live finance and daily habit products.
           </p>
         </div>
@@ -202,14 +203,22 @@ export const ProductsSection: React.FC = () => {
                   </a>
                 )}
 
-                {product.internalHref && (
-                  <a
-                    href={product.internalHref}
-                    className={`btn btn-brand-${product.brandId} project-primary-btn`}
-                  >
-                    <span>{product.internalLabel}</span>
-                  </a>
-                )}
+                {product.internalHref &&
+                  (product.internalHref.startsWith('/') ? (
+                    <Link
+                      to={product.internalHref}
+                      className={`btn btn-brand-${product.brandId} project-primary-btn`}
+                    >
+                      <span>{product.internalLabel}</span>
+                    </Link>
+                  ) : (
+                    <a
+                      href={product.internalHref}
+                      className={`btn btn-brand-${product.brandId} project-primary-btn`}
+                    >
+                      <span>{product.internalLabel}</span>
+                    </a>
+                  ))}
 
                 {(product.playStoreUrl || product.appStoreUrl || product.externalActionUrl) && (
                   <div className="project-secondary-actions">

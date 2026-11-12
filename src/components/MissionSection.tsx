@@ -1,5 +1,5 @@
 import React from 'react';
-import { TECH_TRIAD_MEMBERS } from '../data/triadData';
+import { TECTRIAD_MEMBERS } from '../data/triadData';
 
 export const MissionSection: React.FC = () => {
   return (
@@ -8,46 +8,56 @@ export const MissionSection: React.FC = () => {
         <div className="section-header">
           <div className="section-eyebrow">
             <span className="badge badge-accent">
-              The Triad • People Behind Tech Triad
+              The Triad • People Behind Tectriad
             </span>
           </div>
           <h2>
             Meet the Triad:{' '}
-            <span className="gradient-text">Rajarathinam, Gowtham &amp; Gary</span>
+            <span className="gradient-text">Rajarathinam M, Gowtham M &amp; Gary A</span>
           </h2>
           <p>
-            We are the three co-founders behind Tech Triad—uniting to deliver
+            We are the three co-founders behind Tectriad—uniting to deliver
             accessible developer education via Ethics Of Coding alongside our
             consumer software products xpense-cloud and Streako.
           </p>
         </div>
 
         {/* Founding Triad Cards */}
-        <ul className="pillars-grid" aria-label="Tech Triad founding members">
-          {TECH_TRIAD_MEMBERS.map((member, index) => (
+        <ul className="pillars-grid" aria-label="Tectriad founding members">
+          {TECTRIAD_MEMBERS.map((member, index) => (
             <li
               key={member.id}
               className={`glass-card pillar-card brand-theme-${member.accentId}`}
             >
-              <div className="founder-card-top">
-                <div
-                  className={`pillar-icon-bubble founder-monogram brand-icon-${member.accentId}`}
+              <div className={`founder-photo-frame brand-icon-${member.accentId}`}>
+                <img
+                  src={member.avatar}
+                  alt=""
                   aria-hidden="true"
-                >
-                  <span>{member.initial}</span>
-                </div>
-                <span className="triad-branch-index" aria-hidden="true">
-                  0{index + 1}
-                </span>
+                  className="founder-photo-backdrop"
+                  loading="lazy"
+                />
+                <img
+                  src={member.avatar}
+                  alt={`${member.name}, ${member.role}`}
+                  className="founder-photo-img"
+                  style={{ objectPosition: member.avatarPosition ?? 'center' }}
+                  loading="lazy"
+                />
               </div>
               <div className="pillar-header-group">
-                <span className={`pillar-subtitle brand-text-${member.accentId}`}>
-                  {member.role}
-                </span>
+                <div className="founder-role-row">
+                  <span className={`pillar-subtitle brand-text-${member.accentId}`}>
+                    {member.role}
+                  </span>
+                  <span className="triad-branch-index" aria-hidden="true">
+                    0{index + 1}
+                  </span>
+                </div>
                 <h3 className="pillar-title">{member.name}</h3>
               </div>
               <p className="pillar-desc">
-                One third of the Tech Triad collective—collaborating to build, ship,
+                One third of the Tectriad collective—collaborating to build, ship,
                 and support Ethics Of Coding, xpense-cloud, and Streako.
               </p>
             </li>
@@ -63,9 +73,9 @@ export const MissionSection: React.FC = () => {
             Cost — Because We Value Education.
           </blockquote>
           <div className="quote-attribution">
-            <span className="quote-author">Ethics Of Coding • A Tech Triad Service</span>
+            <span className="quote-author">Ethics Of Coding • A Tectriad Service</span>
             <span className="quote-role">
-              Founded by Rajarathinam, Gowtham &amp; Gary
+              Founded by Rajarathinam M, Gowtham M &amp; Gary A
             </span>
           </div>
         </div>

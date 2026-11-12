@@ -6,35 +6,7 @@ interface IconProps {
   className?: string;
 }
 
-/**
- * Geometric Tech Triad organization emblem: three connected nodes representing
- * the founding triad — Rajarathinam, Gowtham, and Gary.
- */
-export const TechTriadLogo: React.FC<IconProps> = ({ size = 24, className }) => (
-  <svg
-    width={size}
-    height={size}
-    viewBox="0 0 36 36"
-    fill="none"
-    aria-hidden="true"
-    className={className}
-  >
-    <path
-      d="M18 6.5 L8 26.5 L28 26.5 Z"
-      stroke="currentColor"
-      strokeWidth="2.2"
-      strokeLinejoin="round"
-      strokeOpacity="0.35"
-    />
-    <line x1="18" y1="6.5" x2="18" y2="19" stroke="currentColor" strokeWidth="1.8" strokeOpacity="0.45" />
-    <line x1="8" y1="26.5" x2="18" y2="19" stroke="currentColor" strokeWidth="1.8" strokeOpacity="0.45" />
-    <line x1="28" y1="26.5" x2="18" y2="19" stroke="currentColor" strokeWidth="1.8" strokeOpacity="0.45" />
-    <circle cx="18" cy="19" r="3.2" fill="currentColor" />
-    <circle cx="18" cy="6.5" r="4" fill="var(--brand-ethics)" />
-    <circle cx="8" cy="26.5" r="4" fill="var(--brand-xpense)" />
-    <circle cx="28" cy="26.5" r="4" fill="var(--brand-streako)" />
-  </svg>
-);
+export { TectriadLogo } from './TectriadLogo';
 
 export const OfferingBrandIcon: React.FC<{ brandId: TriadBrandId; size?: number }> = ({
   brandId,
@@ -277,6 +249,42 @@ export const ArrowUpIcon: React.FC<IconProps> = ({ size = 14, className }) => (
     className={className}
   >
     <path d="M18 15l-6-6-6 6" />
+  </svg>
+);
+
+export const ArrowRightIcon: React.FC<IconProps> = ({ size = 16, className }) => (
+  <svg
+    width={size}
+    height={size}
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2.2"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    aria-hidden="true"
+    className={className}
+  >
+    <line x1="5" y1="12" x2="19" y2="12" />
+    <polyline points="12 5 19 12 12 19" />
+  </svg>
+);
+
+export const ArrowLeftIcon: React.FC<IconProps> = ({ size = 16, className }) => (
+  <svg
+    width={size}
+    height={size}
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2.2"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    aria-hidden="true"
+    className={className}
+  >
+    <line x1="19" y1="12" x2="5" y2="12" />
+    <polyline points="12 19 5 12 12 5" />
   </svg>
 );
 

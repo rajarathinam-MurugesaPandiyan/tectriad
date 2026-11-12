@@ -1,4 +1,5 @@
 import React, { useState, useMemo, useId } from 'react';
+import { Link } from 'react-router-dom';
 import { VIDEOS_DATA, CHANNEL_URL, CHANNEL_HANDLE } from '../data/videosData';
 import type { CategoryType, VideoItem } from '../types';
 import {
@@ -7,15 +8,21 @@ import {
   PlayIcon,
   ExternalLinkIcon,
   CloseIcon,
+  ArrowRightIcon,
+  ArrowLeftIcon,
 } from './Icons';
 
 interface YouTubeSectionProps {
   onOpenVideoModal: (videoId: string, videoTitle: string) => void;
+  /** When set, shows a preview grid capped to this count with a See More route link. */
+  previewLimit?: number;
 }
 
 export const YouTubeSection: React.FC<YouTubeSectionProps> = ({
   onOpenVideoModal,
+  previewLimit,
 }) => {
+  const isPreview = typeof previewLimit === 'number' && previewLimit > 0;
   const [selectedCategory, setSelectedCategory] = useState<CategoryType>('all');
   const [searchQuery, setSearchQuery] = useState('');
   const searchInputId = useId();
@@ -45,6 +52,10 @@ export const YouTubeSection: React.FC<YouTubeSectionProps> = ({
   ];
 
   const filteredVideos = useMemo(() => {
+    if (isPreview) {
+      return VIDEOS_DATA.slice(0, previewLimit);
+    }
+
     const q = searchQuery.toLowerCase().trim();
     return VIDEOS_DATA.filter((video) => {
       const matchesCategory =
@@ -56,23 +67,46 @@ export const YouTubeSection: React.FC<YouTubeSectionProps> = ({
         video.tags.some((t) => t.toLowerCase().includes(q));
       return matchesCategory && matchesSearch;
     });
-  }, [selectedCategory, searchQuery]);
+  }, [isPreview, previewLimit, selectedCategory, searchQuery]);
+
+  const remainingCount = Math.max(0, VIDEOS_DATA.length - filteredVideos.length);
 
   return (
-    <section className="section-wrapper youtube-section" id="videos">
+    <section
+      className={`section-wrapper youtube-section ${isPreview ? '' : 'tutorials-page-section'}`}
+      id="videos"
+    >
       <div className="container">
+        {!isPreview && (
+          <div className="tutorials-back-bar">
+            <Link to="/" className="btn btn-secondary btn-sm tutorials-back-btn">
+              <ArrowLeftIcon size={15} />
+              <span>Back to Home</span>
+            </Link>
+          </div>
+        )}
+
         <div className="section-header">
           <div className="section-eyebrow">
             <span className="badge badge-yt">
               Ethics Of Coding Academy • {CHANNEL_HANDLE}
             </span>
           </div>
-          <h2>
-            Coding Tutorials &amp; Masterclasses in{' '}
-            <span className="gradient-text">Tamil</span>
-          </h2>
+
+          {isPreview ? (
+            <h2>
+              Coding Tutorials &amp; Masterclasses in{' '}
+              <span className="gradient-text">Tamil</span>
+            </h2>
+          ) : (
+            <h1 className="tutorials-page-title">
+              All Coding Tutorials &amp; Masterclasses in{' '}
+              <span className="gradient-text">Tamil</span>
+            </h1>
+          )}
+
           <p>
-            Tech Triad&apos;s developer education service—teaching Flutter mobile
+            Tectriad&apos;s developer education service—teaching Flutter mobile
             engineering, BLoC state management, modern frontend craft, and real-world
             product architecture step by step.
           </p>
@@ -80,7 +114,9 @@ export const YouTubeSection: React.FC<YouTubeSectionProps> = ({
           <div className="header-channel-bar">
             <div className="channel-info-pill">
               <span className="yt-dot" aria-hidden="true" />
-              <span>Free Education • No Cost Platform</span>
+              <span>
+                Free Education • {VIDEOS_DATA.length} Tutorials Available
+              </span>
             </div>
             <a
               href={`${CHANNEL_URL}?sub_confirmation=1`}
@@ -94,60 +130,64 @@ export const YouTubeSection: React.FC<YouTubeSectionProps> = ({
           </div>
         </div>
 
-        {/* Filter & Search Toolbar */}
-        <div className="video-filter-bar glass-card">
-          <div
-            className="category-pills-row"
-            role="group"
-            aria-label="Filter tutorials by category"
-          >
-            {categories.map((cat) => (
-              <button
-                key={cat.key}
-                type="button"
-                aria-pressed={selectedCategory === cat.key}
-                className={`category-pill-btn ${
-                  selectedCategory === cat.key ? 'active' : ''
-                }`}
-                onClick={() => setSelectedCategory(cat.key)}
+        {/* Full Filter & Search Toolbar on the dedicated Tutorials page */}
+        {!isPreview && (
+          <>
+            <div className="video-filter-bar glass-card">
+              <div
+                className="category-pills-row"
+                role="group"
+                aria-label="Filter tutorials by category"
               >
-                <span>{cat.label}</span>
-                <span className="pill-count">{cat.count}</span>
-              </button>
-            ))}
-          </div>
+                {categories.map((cat) => (
+                  <button
+                    key={cat.key}
+                    type="button"
+                    aria-pressed={selectedCategory === cat.key}
+                    className={`category-pill-btn ${
+                      selectedCategory === cat.key ? 'active' : ''
+                    }`}
+                    onClick={() => setSelectedCategory(cat.key)}
+                  >
+                    <span>{cat.label}</span>
+                    <span className="pill-count">{cat.count}</span>
+                  </button>
+                ))}
+              </div>
 
-          <div className="search-input-wrapper">
-            <label htmlFor={searchInputId} className="visually-hidden">
-              Search tutorials
-            </label>
-            <SearchIcon size={17} className="search-icon" />
-            <input
-              id={searchInputId}
-              type="search"
-              className="search-input"
-              placeholder="Search tutorials (Flutter, BLoC, Web, Xpense)..."
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-            />
-            {searchQuery && (
-              <button
-                type="button"
-                className="clear-search-btn"
-                onClick={() => setSearchQuery('')}
-                aria-label="Clear search query"
-              >
-                <CloseIcon size={15} />
-              </button>
-            )}
-          </div>
-        </div>
+              <div className="search-input-wrapper">
+                <label htmlFor={searchInputId} className="visually-hidden">
+                  Search tutorials
+                </label>
+                <SearchIcon size={17} className="search-icon" />
+                <input
+                  id={searchInputId}
+                  type="search"
+                  className="search-input"
+                  placeholder="Search tutorials (Flutter, BLoC, Web, Xpense)..."
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                />
+                {searchQuery && (
+                  <button
+                    type="button"
+                    className="clear-search-btn"
+                    onClick={() => setSearchQuery('')}
+                    aria-label="Clear search query"
+                  >
+                    <CloseIcon size={15} />
+                  </button>
+                )}
+              </div>
+            </div>
 
-        <p className="results-status" aria-live="polite">
-          Showing {filteredVideos.length} of {VIDEOS_DATA.length} tutorials
-          {selectedCategory !== 'all' ? ` in ${selectedCategory}` : ''}
-          {searchQuery.trim() ? ` matching "${searchQuery.trim()}"` : ''}.
-        </p>
+            <p className="results-status" aria-live="polite">
+              Showing {filteredVideos.length} of {VIDEOS_DATA.length} tutorials
+              {selectedCategory !== 'all' ? ` in ${selectedCategory}` : ''}
+              {searchQuery.trim() ? ` matching "${searchQuery.trim()}"` : ''}.
+            </p>
+          </>
+        )}
 
         {filteredVideos.length > 0 ? (
           <div className="videos-grid">
@@ -250,13 +290,26 @@ export const YouTubeSection: React.FC<YouTubeSectionProps> = ({
           </div>
         )}
 
+        {isPreview && remainingCount > 0 && (
+          <div className="videos-see-more-row">
+            <Link to="/tutorials" className="btn btn-primary videos-see-more-btn">
+              <span>See More Tutorials ({VIDEOS_DATA.length} Total)</span>
+              <ArrowRightIcon size={16} />
+            </Link>
+            <p className="videos-see-more-caption">
+              Showing {filteredVideos.length} of {VIDEOS_DATA.length} tutorials — filter by
+              category &amp; search all masterclasses.
+            </p>
+          </div>
+        )}
+
         <div className="glass-card channel-cta-banner">
           <div className="channel-cta-left">
             <h3>Want more tutorials and live architecture sessions?</h3>
             <p>
               Subscribe to <strong>Ethics Of Coding</strong> on YouTube to get
               notified whenever new Flutter masterclasses, web engineering
-              guides, and Tech Triad product breakdowns go live.
+              guides, and Tectriad product breakdowns go live.
             </p>
           </div>
           <div className="channel-cta-right">

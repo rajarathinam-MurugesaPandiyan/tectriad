@@ -111,7 +111,7 @@ export const VideoModal: React.FC<VideoModalProps> = ({
 
           <div className="modal-footer">
             <span className="modal-note">
-              Ethics Of Coding Academy • Tech Triad
+              Ethics Of Coding Academy • Tectriad
             </span>
             <div className="modal-footer-actions">
               <a

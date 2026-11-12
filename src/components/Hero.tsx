@@ -1,15 +1,14 @@
-import React from 'react';
+import React from "react";
 import {
-  TECH_TRIAD_ORG,
-  TECH_TRIAD_MEMBERS,
-  TECH_TRIAD_OFFERINGS,
-} from '../data/triadData';
+  TECTRIAD_ORG,
+  TECTRIAD_OFFERINGS,
+} from "../data/triadData";
 import {
-  TechTriadLogo,
+  TectriadLogo,
   OfferingBrandIcon,
   PlayIcon,
   ExternalLinkIcon,
-} from './Icons';
+} from "./Icons";
 
 export const Hero: React.FC = () => {
   return (
@@ -18,15 +17,15 @@ export const Hero: React.FC = () => {
         <div className="hero-text-block">
           <div className="badge badge-primary hero-badge">
             <span className="pulsing-dot" aria-hidden="true" />
-            <span>{TECH_TRIAD_ORG.eyebrow}</span>
+            <span>{TECTRIAD_ORG.eyebrow}</span>
           </div>
 
           <h1 className="hero-title">
-            {TECH_TRIAD_ORG.headlinePrefix}{' '}
-            <span className="gradient-text">{TECH_TRIAD_ORG.headlineAccent}</span>
+            {TECTRIAD_ORG.headlinePrefix}{" "}
+            <span className="gradient-text">{TECTRIAD_ORG.headlineAccent}</span>
           </h1>
 
-          <p className="hero-description">{TECH_TRIAD_ORG.description}</p>
+          <p className="hero-description">{TECTRIAD_ORG.description}</p>
 
           <div className="hero-actions">
             <a href="#products" className="btn btn-primary">
@@ -39,41 +38,21 @@ export const Hero: React.FC = () => {
           </div>
         </div>
 
-        {/* Visual Tech Triad Organizational Hierarchy Pattern */}
+        {/* Visual Tectriad Organizational Hierarchy Pattern */}
         <div
           className="triad-architecture"
-          aria-label="Tech Triad founding team and products & services structure"
+          aria-label="Tectriad founding team and products & services structure"
         >
-          {/* Top Node: The Founding Triad (Rajarathinam, Gowtham & Gary) */}
+          {/* Top Node: The Founding Triad (Rajarathinam M, Gowtham M & Gary A) */}
           <div className="triad-parent-node glass-card">
             <div className="triad-parent-head">
               <div className="triad-parent-emblem">
-                <TechTriadLogo size={26} />
+                <TectriadLogo size={30} />
               </div>
               <div className="triad-parent-copy">
-                <span className="triad-parent-kicker">The Founding Triad</span>
-                <span className="triad-parent-name">{TECH_TRIAD_ORG.name}</span>
+                <span className="triad-parent-name">{TECTRIAD_ORG.name}</span>
               </div>
             </div>
-
-            <span className="triad-parent-divider" aria-hidden="true" />
-
-            <ul className="triad-founders-pills" aria-label="Triad co-founders">
-              {TECH_TRIAD_MEMBERS.map((member) => (
-                <li
-                  key={member.id}
-                  className={`triad-founder-pill brand-theme-${member.accentId}`}
-                >
-                  <span
-                    className={`triad-founder-avatar brand-icon-${member.accentId}`}
-                    aria-hidden="true"
-                  >
-                    {member.initial}
-                  </span>
-                  <span className="triad-founder-name">{member.name}</span>
-                </li>
-              ))}
-            </ul>
           </div>
 
           {/* Architectural Connector Lines branching into Products & Services */}
@@ -125,34 +104,42 @@ export const Hero: React.FC = () => {
               />
             </svg>
             <span className="triad-connector-label">
-              {TECH_TRIAD_ORG.offeringsLabel}
+              {TECTRIAD_ORG.offeringsLabel}
             </span>
           </div>
 
-          {/* Products & Services Built Underneath Tech Triad */}
+          {/* Products & Services Built Underneath Tectriad */}
           <ul className="triad-branches-grid">
-            {TECH_TRIAD_OFFERINGS.map((offering) => (
+            {TECTRIAD_OFFERINGS.map((offering) => (
               <li
                 key={offering.id}
                 className={`triad-branch-card glass-card brand-theme-${offering.id}`}
               >
                 <div className="triad-branch-top">
-                  <div className={`triad-branch-icon brand-icon-${offering.id}`}>
+                  <div
+                    className={`triad-branch-icon brand-icon-${offering.id}`}
+                  >
                     <OfferingBrandIcon brandId={offering.id} size={20} />
                   </div>
-                  <span className={`triad-kind-badge brand-chip-${offering.id}`}>
+                  <span
+                    className={`triad-kind-badge brand-chip-${offering.id}`}
+                  >
                     {offering.kind}
                   </span>
                 </div>
 
                 <div className="triad-branch-body">
-                  <span className="triad-branch-role">{offering.roleLabel}</span>
+                  <span className="triad-branch-role">
+                    {offering.roleLabel}
+                  </span>
                   <h2 className="triad-branch-name">{offering.name}</h2>
                   <p className="triad-branch-summary">{offering.summary}</p>
                 </div>
 
                 <div className="triad-branch-footer">
-                  <span className={`triad-status-chip brand-chip-${offering.id}`}>
+                  <span
+                    className={`triad-status-chip brand-chip-${offering.id}`}
+                  >
                     {offering.statusLabel}
                   </span>
                   <div className="triad-branch-links">

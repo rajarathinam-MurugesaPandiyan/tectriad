@@ -1,7 +1,8 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { CHANNEL_URL, CHANNEL_HANDLE } from '../data/videosData';
 import {
-  TechTriadLogo,
+  TectriadLogo,
   YouTubeIcon,
   ArrowUpIcon,
   ExternalLinkIcon,
@@ -25,19 +26,19 @@ export const Footer: React.FC = () => {
         <div className="footer-brand-col">
           <div className="footer-logo">
             <div className="logo-badge">
-              <TechTriadLogo size={24} />
+              <TectriadLogo size={32} />
             </div>
             <div className="footer-brand-stack">
-              <span className="footer-brand-name">Tech Triad</span>
+              <span className="footer-brand-name">Tectriad</span>
               <span className="footer-brand-sub">
-                Rajarathinam • Gowtham • Gary
+                Rajarathinam M • Gowtham M • Gary A
               </span>
             </div>
           </div>
 
           <p className="footer-about-text">
             A software and developer education organization founded by
-            Rajarathinam, Gowtham, and Gary—building Ethics Of Coding,
+            Rajarathinam M, Gowtham M, and Gary A—building Ethics Of Coding,
             xpense-cloud, and Streako.
           </p>
 
@@ -59,7 +60,7 @@ export const Footer: React.FC = () => {
           <h2 className="footer-col-title">Products &amp; Services</h2>
           <ul className="footer-links-list">
             <li>
-              <a href="#videos">Ethics Of Coding (Service)</a>
+              <Link to="/tutorials">Ethics Of Coding (Service)</Link>
             </li>
             <li>
               <a
@@ -80,10 +81,10 @@ export const Footer: React.FC = () => {
               </a>
             </li>
             <li>
-              <a href="#products">All Products &amp; Services</a>
+              <Link to="/#products">All Products &amp; Services</Link>
             </li>
             <li>
-              <a href="#mission">Meet the Triad</a>
+              <Link to="/#mission">Meet the Triad</Link>
             </li>
           </ul>
         </div>
@@ -93,19 +94,19 @@ export const Footer: React.FC = () => {
           <h2 className="footer-col-title">Popular Masterclasses</h2>
           <ul className="footer-links-list">
             <li>
-              <a href="#videos">Flutter Complete Tutorial Season 1</a>
+              <Link to="/tutorials">Flutter Complete Tutorial Season 1</Link>
             </li>
             <li>
-              <a href="#videos">Flutter Complete Tutorial Season 2</a>
+              <Link to="/tutorials">Flutter Complete Tutorial Season 2</Link>
             </li>
             <li>
-              <a href="#videos">Flutter BLoC Pattern Masterclass</a>
+              <Link to="/tutorials">Flutter BLoC Pattern Masterclass</Link>
             </li>
             <li>
-              <a href="#videos">Web Dev Course (HTML, CSS, JS)</a>
+              <Link to="/tutorials">Web Dev Course (HTML, CSS, JS)</Link>
             </li>
             <li>
-              <a href="#product-xpense-cloud">xpense-cloud Case Study</a>
+              <Link to="/#product-xpense-cloud">xpense-cloud Case Study</Link>
             </li>
           </ul>
         </div>
@@ -133,8 +134,8 @@ export const Footer: React.FC = () => {
 
       <div className="container footer-bottom-bar">
         <div className="bottom-copy">
-          © {new Date().getFullYear()} Tech Triad • Founded by Rajarathinam,
-          Gowtham &amp; Gary.
+          © {new Date().getFullYear()} Tectriad • Founded by Rajarathinam M,
+          Gowtham M &amp; Gary A.
         </div>
         <div className="bottom-center">
           Ethics Of Coding • xpense-cloud • Streako

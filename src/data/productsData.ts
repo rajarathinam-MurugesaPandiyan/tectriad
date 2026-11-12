@@ -16,7 +16,7 @@ export const PRODUCTS_DATA: ProductItem[] = [
       'Built to replace cluttered spreadsheets with real-time cashflow visibility, visual budget caps, multi-currency tracking, and offline-first cross-device synchronization.',
     websiteUrl: 'https://xpense-cloud.in',
     websiteLabel: 'Launch xpense-cloud.in',
-    playStoreUrl: 'https://play.google.com/store/apps/details?id=com.ragogaxpense_tracker',
+    playStoreUrl: 'https://play.google.com/store/apps/details?id=com.ethicsofcoding.xpensecloud',
     appStoreUrl: 'https://apps.apple.com/app/xpense-cloud/id1649201923',
     highlights: [
       'Real-time Cloud Sync',
@@ -59,12 +59,13 @@ export const PRODUCTS_DATA: ProductItem[] = [
     category: 'Habits & Productivity',
     badge: 'Habit Product',
     status: 'Live',
-    platforms: 'Web App • Mobile Ready',
+    platforms: 'Android • Web',
     tagline: 'Daily Habit Tracking, Streak Momentum & Consistency Analytics',
     description:
       'Designed to make consistency effortless. Track daily habits, protect active streaks, visualize long-term progress patterns, and turn small daily wins into lasting routines.',
     websiteUrl: 'http://streako.in/',
     websiteLabel: 'Open streako.in',
+    playStoreUrl: 'https://play.google.com/store/apps/details?id=com.ethicsofcoding.streako',
     highlights: [
       'Daily Streak Engine',
       'Visual Heatmaps',
@@ -73,7 +74,7 @@ export const PRODUCTS_DATA: ProductItem[] = [
     ],
     stats: [
       { label: 'Core Loop', value: 'Daily Streaks' },
-      { label: 'Availability', value: 'streako.in' },
+      { label: 'Platforms', value: 'Android + Web' },
     ],
     features: [
       {
@@ -109,9 +110,9 @@ export const PRODUCTS_DATA: ProductItem[] = [
     platforms: 'YouTube • GitHub • Web',
     tagline: 'Free Tamil Coding Masterclasses & Engineering Architecture Kits',
     description:
-      'Tech Triad’s developer education service—empowering learners without language barriers through in-depth Flutter, BLoC, React, and Clean Architecture tutorials.',
-    internalHref: '#videos',
-    internalLabel: 'Browse 16+ Tutorials',
+      'Tectriad’s developer education service—empowering learners without language barriers through in-depth Flutter, BLoC, React, and Clean Architecture tutorials.',
+    internalHref: '/tutorials',
+    internalLabel: 'Browse All 16+ Tutorials',
     externalActionUrl: `${CHANNEL_URL}?sub_confirmation=1`,
     externalActionLabel: `YouTube (${CHANNEL_HANDLE})`,
     highlights: [
@@ -142,7 +143,7 @@ export const PRODUCTS_DATA: ProductItem[] = [
       },
       {
         title: 'Open Learning Community',
-        description: 'Guided developer education and reusable kits crafted by Tech Triad.',
+        description: 'Guided developer education and reusable kits crafted by Tectriad.',
         icon: 'shield',
       },
     ],

@@ -1,41 +1,50 @@
 import type { OfferingSummary, TriadMember } from '../types';
 import { CHANNEL_HANDLE, CHANNEL_URL } from './videosData';
+import rajarathinamImg from '../assets/rajarathinam.jpg';
+import gowthamImg from '../assets/gowtham.JPG';
+import garyImg from '../assets/gary.JPG';
 
-export const TECH_TRIAD_MEMBERS: TriadMember[] = [
+export const TECTRIAD_MEMBERS: TriadMember[] = [
   {
     id: 'rajarathinam',
-    name: 'Rajarathinam',
+    name: 'Rajarathinam M',
     initial: 'R',
+    avatar: rajarathinamImg,
+    avatarPosition: '50% 34%',
     role: 'Co-Founder • The Triad',
     accentId: 'ethics-of-coding',
   },
   {
     id: 'gowtham',
-    name: 'Gowtham',
+    name: 'Gowtham M',
     initial: 'G',
+    avatar: gowthamImg,
+    avatarPosition: '50% 22%',
     role: 'Co-Founder • The Triad',
     accentId: 'xpense-cloud',
   },
   {
     id: 'gary',
-    name: 'Gary',
+    name: 'Gary A',
     initial: 'G',
+    avatar: garyImg,
+    avatarPosition: '50% 24%',
     role: 'Co-Founder • The Triad',
     accentId: 'streako',
   },
 ];
 
-export const TECH_TRIAD_ORG = {
-  name: 'Tech Triad',
-  eyebrow: 'Tech Triad • Rajarathinam, Gowtham & Gary',
+export const TECTRIAD_ORG = {
+  name: 'Tectriad',
+  eyebrow: 'Tectriad • Rajarathinam M, Gowtham M & Gary A',
   headlinePrefix: 'Built by Three Builders. Products & Services for',
   headlineAccent: 'Real Impact.',
   description:
-    'Tech Triad is the software and education organization founded by Rajarathinam, Gowtham, and Gary—delivering Ethics Of Coding, xpense-cloud, and Streako.',
+    'Tectriad is the software and education organization founded by Rajarathinam M, Gowtham M, and Gary A—delivering Ethics Of Coding, xpense-cloud, and Streako.',
   offeringsLabel: 'Our Products & Services',
 };
 
-export const TECH_TRIAD_OFFERINGS: OfferingSummary[] = [
+export const TECTRIAD_OFFERINGS: OfferingSummary[] = [
   {
     id: 'ethics-of-coding',
     kind: 'Service',
@@ -68,7 +77,7 @@ export const TECH_TRIAD_OFFERINGS: OfferingSummary[] = [
     roleLabel: 'Product • Habit & Streak Tracker',
     summary:
       'Build lasting daily routines with effortless check-ins, visual consistency streaks, and habit momentum.',
-    statusLabel: 'Live • Web App',
+    statusLabel: 'Live • Android & Web',
     targetSection: '#product-streako',
     externalUrl: 'http://streako.in/',
   },

@@ -1,9 +1,9 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
   <rect width="100" height="100" rx="24" fill="#080B12"/>
   <rect x="3" y="3" width="94" height="94" rx="21" fill="none" stroke="#1E293B" stroke-width="2"/>
-  <!-- Connecting Triad Triangle: Rajarathinam, Gowtham & Gary -->
+  <!-- Connecting Triad Triangle: Rajarathinam M, Gowtham M & Gary A -->
   <path d="M50 24 L26 68 L74 68 Z" fill="none" stroke="#38BDF8" stroke-width="5" stroke-linejoin="round" stroke-opacity="0.45"/>
-  <!-- Central Tech Triad Studio Node -->
+  <!-- Central Tectriad Studio Node -->
   <circle cx="50" cy="52" r="7" fill="#F8FAFC"/>
   <!-- Three Co-Founder Triad Nodes -->
   <circle cx="50" cy="24" r="10" fill="#38BDF8"/>
